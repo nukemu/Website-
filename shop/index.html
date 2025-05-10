@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <title>Shop</title>
+</head>
+<body>
+    
+    <header class="header">
+        <div class="container">
+            <div class="head">
+                <h1 class="logo">Говно<span class="logo cod">код</span>еры</h1>
+                    <div class="search-form">
+                        <input class="search" type="text" placeholder="Введите текст">
+                        <a href="#"> <img src="image/lupa.png" alt="лупа" class="lupa"> </a>
+                    </div>
+                    <nav class="navigation">
+                        <a href="google.com"><img class="imag" src="image/korzina.png" alt="корзина"></a>
+                        <a href="../register/register.html"><img class="imag" src="image/profile.png" alt="профиль"></a>
+        
+                    </nav> 
+            </div>
+        
+    
+            <nav class="nav-info">
+                    <div class="people-list">
+
+                        <a class="people">
+                            <div class="people-card active" data-service="service1">
+                                <img src="image/kyrlyk.png" alt="kyrlyk" class="kyrlyk-photo">
+                                <p class="front-txt"> Kyrlyk<br><span>Frontend</span></p>
+                            </div>
+                        </a>
+        
+                        <a class="people">
+                            <div class="people-card" data-service="service2">
+                                <img src="image/nukemu.jpg" alt="nukemu" class="kyrlyk-photo">
+                                <p class="front-txt"> nukemu<br><span>Backend</span></p>
+                            </div>
+                        </a>
+        
+                        <a class="people">
+                            <div class="people-card" data-service="service3">
+                                <img src="image/mocs.jpg" alt="mocs" class="kyrlyk-photo">
+                                <p class="front-txt"> mocs<br><span>Backend</span></p>
+                            </div>
+                        </a>
+                    </div>
+            </nav>
+        </div>
+
+    </header>
+
+    <main>
+        <div class="container">
+
+            <div class="kataloguslug active" id="service1">
+                <div class="left-search">
+                    <aside>
+                        <div class="services">
+                            <h1 class="service-head">Типы услуг</h1>
+                            <ul class="services-list">
+                                <li> <input type="checkbox" name="option" onclick="handleCheckbox(this)" id="serviceCheckbox" class="checkbox-input"> <label>Вёрстка сайта</label></li>
+                                <li> <input type="checkbox" name="option" onclick="handleCheckbox(this)" id="serviceCheckbox2" class="checkbox-input2"> <label>Исправление кода</label></li>
+                                <li> <input type="checkbox" name="option" onclick="handleCheckbox(this)" id="serviceCheckbox3" class="checkbox-input3"> <label>Адаптация сайта</label></li>
+                            </ul>
+                        </div>
+                    </aside>
+                    
+                    <article>
+                        <div class="none-idea">
+                            <h1 class="none-txt">Не придумал</h1>
+                        </div>
+                    </article>
+                </div>
+
+                <article class="article-card">
+                    <div class="card-verstka">
+                        <img src="image/verstka.png" alt="verstka" class="verstka-image">
+                        <h3 class="verstka-txt">Семантическая вёрстка</h3>
+                        <div class="bottom-card">
+                            <h2 class="verstka-mon">5 USD</h2>
+                            <button class="basket">В КОРЗИНУ</button>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+
+            <div class="kataloguslug" id="service2">
+                <div class="left-search">
+                    <aside>
+                        <div class="services">
+                            <h1 class="service-head">Типы услуг</h1>
+                            <ul class="services-list">
+                                <li> <input type="checkbox" name="option" onclick="handleCheckbox(this)" id="serviceCheckbox" class="checkbox-input"> <label>База данных</label></li>
+                                <li> <input type="checkbox" name="option" onclick="handleCheckbox(this)" id="serviceCheckbox2" class="checkbox-input2"> <label>Рефакторинг</label></li>
+                                <li> <input type="checkbox" name="option" onclick="handleCheckbox(this)" id="serviceCheckbox3" class="checkbox-input3"> <label>API</label></li>
+                            </ul>
+                        </div>
+                    </aside>
+                    
+                    <article>
+                        <div class="none-idea">
+                            <h1 class="none-txt">Не придумал</h1>
+                        </div>
+                    </article>
+                </div>
+
+                <article class="article-card">
+                    <div class="card-verstka">
+                        <img src="image/base.png" alt="verstka" class="verstka-image">
+                        <h3 class="verstka-txt">База данных</h3>
+                        <div class="bottom-card">
+                            <h2 class="verstka-mon">10 USD</h2>
+                            <button class="basket">В КОРЗИНУ</button>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+
+            <div class="kataloguslug" id="service3">
+                <div class="left-search">
+                    <aside>
+                        <div class="services">
+                            <h1 class="service-head">Типы услуг</h1>
+                            <ul class="services-list">
+                                <li> <input type="checkbox" name="option" onclick="handleCheckbox(this)" id="serviceCheckbox" class="checkbox-input"> <label>Оптимизация API</label></li>
+                                <li> <input type="checkbox" name="option" onclick="handleCheckbox(this)" id="serviceCheckbox2" class="checkbox-input2"> <label>Настройка серверов</label></li>
+                                <li> <input type="checkbox" name="option" onclick="handleCheckbox(this)" id="serviceCheckbox3" class="checkbox-input3"> <label>Мониторинг</label></li>
+                            </ul>
+                        </div>
+                    </aside>
+                    
+                    <article>
+                        <div class="none-idea">
+                            <h1 class="none-txt">Не придумал</h1>
+                        </div>
+                    </article>
+                </div>
+
+                <article class="article-card">
+                    <div class="card-verstka">
+                        <img src="image/api.png" alt="verstka" class="verstka-image">
+                        <h3 class="verstka-txt">Оптимизация Api</h3>
+                        <div class="bottom-card">
+                            <h2 class="verstka-mon">10 USD</h2>
+                            <button class="basket">В КОРЗИНУ</button>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </main>
+
+    
+
+    <footer></footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
