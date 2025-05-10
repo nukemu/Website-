@@ -42,8 +42,6 @@ async def check_login():
     return {"message": "You have the access token!"}
 
 
-
-
 if __name__ == "__main__":
     asyncio.run(create_tables(engine))
     uvicorn.run("main:app", reload=True)
