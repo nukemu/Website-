@@ -63,7 +63,8 @@ async def register_user(username: str, password: str, response: Response):
 
 async def login_user(username: str, password: str, response: Response):
     async with session_factory() as session:
-        result = await session.execute(select(UsersOrm).where(UsersOrm.username==username))
+        result = await session.execute(
+            select(UsersOrm).where(UsersOrm.username==username))
         user = result.scalar_one_or_none()
         
         if user is None:
