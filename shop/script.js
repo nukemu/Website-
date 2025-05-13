@@ -1,32 +1,60 @@
-
 document.addEventListener('DOMContentLoaded', function() {
-    // Получаем все вкладки с разработчиками
-    const peopleCards = document.querySelectorAll('.people-card');
-    // Получаем все разделы с услугами
-    const serviceSections = document.querySelectorAll('.kataloguslug');
-
-    // Обработчик для переключения между разработчиками
-    peopleCards.forEach(card => {
-        card.addEventListener('click', function(e) {
-            e.preventDefault();
-            // Удаляем активный класс у всех карточек
-            peopleCards.forEach(c => c.classList.remove('active'));
-            // Добавляем активный класс текущей карточке
-            this.classList.add('active');
+    const serviceButtons = document.querySelectorAll('.uslugi');
+    const bioButtons = document.querySelectorAll('.biograf');
+    const allServiceCatalogs = document.querySelectorAll('.kataloguslug');
+    const allBioCatalogs = document.querySelectorAll('.bio-catalog');
+    
+    // Скрываем все каталоги при загрузке
+    allServiceCatalogs.forEach((catalog, index) => {
+        if (index !== 0) {
+            catalog.classList.remove('active');
+        }
+    });
+    allBioCatalogs.forEach(catalog => catalog.classList.remove('active'));
+    
+    // Обработчики для кнопок "Услуги"
+    serviceButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Скрываем все каталоги
+            allServiceCatalogs.forEach(catalog => catalog.classList.remove('active'));
+            allBioCatalogs.forEach(catalog => catalog.classList.remove('active'));
             
-            // Получаем data-атрибут для определения какой раздел показать
+            // Показываем нужный каталог услуг
             const serviceId = this.getAttribute('data-service');
-            
-            // Скрываем все разделы
-            serviceSections.forEach(section => {
-                section.classList.remove('active');
-            });
-            
-            // Показываем нужный раздел
             document.getElementById(serviceId).classList.add('active');
+            
+            // Обновляем активные кнопки
+            serviceButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            bioButtons.forEach(btn => btn.classList.remove('active'));
         });
     });
+    
+    // Обработчики для кнопок "Биография"
+    bioButtons.forEach((button, index) => {
+        button.addEventListener('click', function() {
+            // Скрываем все каталоги
+            allServiceCatalogs.forEach(catalog => catalog.classList.remove('active'));
+            allBioCatalogs.forEach(catalog => catalog.classList.remove('active'));
+            
+            // Показываем нужную биографию
+            const bioId = 'bio' + (index + 1);
+            document.getElementById(bioId).classList.add('active');
+            
+            // Обновляем активные кнопки
+            serviceButtons.forEach(btn => btn.classList.remove('active'));
+            bioButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+    
+    // По умолчанию показываем услуги первого пользователя
+    document.querySelector('.uslugi').click();
+});
 
+
+
+    // ЧЕКБОКСЫ
     // Для каждого раздела услуг настраиваем свои чекбоксы
     serviceSections.forEach(section => {
         const checkboxes = section.querySelectorAll('.checkbox-input');
@@ -50,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     });
-});
+
 
 function handleCheckbox(clickedCheckbox) {
     const checkboxes = document.querySelectorAll('input[name="option"]');
