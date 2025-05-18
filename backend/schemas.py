@@ -9,3 +9,12 @@ class UsersLoginSchema(BaseModel):
 class UsersRegisterSchema(BaseModel):
     username: str
     password: str
+    
+
+class SetAdmin(BaseModel):
+    username: str
+  
+    
+class CheckAdmin(BaseModel):
+    username: str
+    password: str

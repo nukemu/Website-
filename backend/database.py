@@ -6,7 +6,8 @@ from config import settings
 
 engine = create_async_engine(
     settings.DATA_BASE_URL_asyncpg,
-    echo=True
+    echo=False,
+    pool_pre_ping=True
 )
 
 session_factory = async_sessionmaker(engine)
