@@ -31,6 +31,20 @@ def get_hashed_password(password: str):
 
 def verify_password(plain_password: str,  hashed_password: str):
     return pwd_context.verify(plain_password, hashed_password)
+
+
+async def admin_true(username: str):
+    async with session_factory() as session:
+        result = await session.execute(
+            select(UsersOrm).where(
+                and_(
+                    UsersOrm.username==username, 
+                    UsersOrm.is_admin==True
+                    )
+                )
+            )
+        
+        return result.scalar_one_or_none()
     
     
 async def register_user(username: str, password: str, response: Response):
@@ -99,19 +113,8 @@ async def login_user(username: str, password: str, response: Response):
     
     
 async def check_admin(username: str, password: str):
-    async with session_factory() as session:
-        result = await session.execute(
-            select(UsersOrm).where(
-                and_(
-                    UsersOrm.username==username, 
-                    UsersOrm.is_admin==True
-                    )
-                )
-            )
-        
-        
-        user = result.scalar_one_or_none()
-        
+    user = await admin_true(username)
+    
     if not user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED, 
@@ -139,9 +142,35 @@ async def new_admin_set(username: str):
                 detail="User not found",
             ) 
             
+        if await admin_true(username):
+            return {"message": "This user alredy admin"}
+            
         user.is_admin = True
         await session.commit()
         
         return {"message": f"User {username} is now an admin!"}
-        
     
+    
+async def admin_delete(username: str):
+    async with session_factory() as session:
+        result = await session.execute(
+            select(UsersOrm).where(
+                and_(
+                    UsersOrm.username==username, 
+                    UsersOrm.is_admin==True
+                    )
+                )
+            )
+        
+        user = result.scalar_one_or_none()
+        
+        if not user:
+            return {"message": "This user are not have the admin privilegi"}
+        
+        user.is_admin = False
+        await session.commit()
+            
+        return {"message": f"User {username} delete from admins"}
+            
+        
+        

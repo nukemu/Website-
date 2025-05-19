@@ -18,3 +18,8 @@ class SetAdmin(BaseModel):
 class CheckAdmin(BaseModel):
     username: str
     password: str
+    
+    
+class DeleteAdmin(BaseModel):
+    username: str
+    password: str

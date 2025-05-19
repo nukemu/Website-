@@ -4,9 +4,9 @@ import uvicorn
 from fastapi import FastAPI, HTTPException, Depends, Response, Request, status
 from fastapi.middleware.cors import CORSMiddleware
 
-from schemas import UsersLoginSchema, UsersRegisterSchema, CheckAdmin, SetAdmin
+from schemas import UsersLoginSchema, UsersRegisterSchema, CheckAdmin, SetAdmin, DeleteAdmin
 from jwt_config import security, config
-from orm import register_user, login_user, create_tables, check_admin, new_admin_set
+from orm import register_user, login_user, create_tables, check_admin, new_admin_set, admin_delete
 from database import engine
 
 app = FastAPI()
@@ -53,6 +53,12 @@ async def set_new_admin(set_admin: SetAdmin, verify_admin: CheckAdmin):
         )
     
     return await new_admin_set(set_admin.username)
+
+
+@app.post("/delete_admin/", dependencies=[Depends(security.access_token_required)])
+async def delete_admin(set_admin: SetAdmin, delete_admin: DeleteAdmin):
+    if await check_admin(delete_admin.username, delete_admin.password):
+        return await admin_delete(set_admin.username)
 
 
 if __name__ == "__main__":
