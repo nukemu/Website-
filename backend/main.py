@@ -56,9 +56,9 @@ async def set_new_admin(set_admin: SetAdmin, verify_admin: CheckAdmin):
 
 
 @app.post("/delete_admin/", dependencies=[Depends(security.access_token_required)])
-async def delete_admin(set_admin: SetAdmin, delete_admin: DeleteAdmin):
-    if await check_admin(delete_admin.username, delete_admin.password):
-        return await admin_delete(set_admin.username)
+async def delete_admin(delete_admin: DeleteAdmin, check_admins: CheckAdmin):
+    if await check_admin(check_admins.username, check_admins.password):
+        return await admin_delete(delete_admin.username, delete_admin.reason)
 
 
 if __name__ == "__main__":

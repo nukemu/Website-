@@ -18,5 +18,5 @@ class DeleteAdminsOrm(Base):
     
     id: Mapped[int] = mapped_column(primary_key=True)
     username: Mapped[str]
-    reason: Mapped[str] = Field(..., min_length=10, max_length=50)
+    reason: Mapped[str]
     

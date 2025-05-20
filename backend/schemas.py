@@ -22,4 +22,4 @@ class CheckAdmin(BaseModel):
     
 class DeleteAdmin(BaseModel):
     username: str
-    password: str
+    reason: str

@@ -4,7 +4,7 @@ from passlib.context import CryptContext
 from sqlalchemy import select, and_
 from fastapi import HTTPException, Response, status, Depends, Request
 
-from models import UsersOrm
+from models import UsersOrm, DeleteAdminsOrm
 from database import Base, session_factory
 from jwt_config import security, config
 
@@ -14,7 +14,7 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 async def create_tables(engine):
     async with engine.begin() as conn:
-        # await conn.run_sync(Base.metadata.drop_all)
+        await conn.run_sync(Base.metadata.drop_all)
         await conn.run_sync(Base.metadata.create_all)
 
 
@@ -151,7 +151,7 @@ async def new_admin_set(username: str):
         return {"message": f"User {username} is now an admin!"}
     
     
-async def admin_delete(username: str):
+async def admin_delete(username: str, reason: str):
     async with session_factory() as session:
         result = await session.execute(
             select(UsersOrm).where(
@@ -168,6 +168,9 @@ async def admin_delete(username: str):
             return {"message": "This user are not have the admin privilegi"}
         
         user.is_admin = False
+        reason_db = DeleteAdminsOrm(username=username, reason=reason)
+        
+        session.add(reason_db)
         await session.commit()
             
         return {"message": f"User {username} delete from admins"}
