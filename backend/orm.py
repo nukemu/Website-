@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta
 import logging
 
 from passlib.context import CryptContext
@@ -61,7 +62,6 @@ async def register_user(username: str, password: str, response: Response):
         user = UsersOrm(
             username=username, 
             hashed_password=get_hashed_password(password),
-            is_admin=False,
         )
         
         session.add(user)
@@ -96,6 +96,12 @@ async def login_user(username: str, password: str, response: Response):
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
                 detail="Incorrect username or password"
+            )
+            
+        if user.is_banned:
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail=f"Account banned. Reason: {user.ban_reason}"
             )
             
         token = security.create_access_token(uid=str(user.id))
@@ -176,4 +182,32 @@ async def admin_delete(username: str, reason: str):
         return {"message": f"User {username} delete from admins"}
             
         
+async def user_ban(username: str, reason: str, hours: int):
+    async with session_factory() as session:
+        result = await session.execute(
+            select(UsersOrm).where(
+                and_(
+                    UsersOrm.username==username,
+                    UsersOrm.is_banned==False
+                )
+            )
+        )
         
+        user = result.scalar_one_or_none()
+        
+        if not user.username:
+            return {"message": "User with this name not found"}
+        
+        if user.is_banned:
+            return {"message": "This user is already banned"}
+        
+        if hours == 0:
+            user.banned_until = None
+        else:
+            user.banned_until = datetime.now() + timedelta(hours=hours)
+        
+        user.is_banned=True
+        user.ban_reason=reason
+        await session.commit()
+        
+        return {"message": f"The user {username} has been banned"}

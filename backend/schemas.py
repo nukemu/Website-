@@ -23,3 +23,9 @@ class CheckAdmin(BaseModel):
 class DeleteAdmin(BaseModel):
     username: str
     reason: str
+    
+
+class BanUser(BaseModel):
+    username: str
+    reason: str
+    time: int

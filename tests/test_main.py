@@ -8,6 +8,15 @@ import pytest_asyncio
 import asyncio
 
 
+@pytest_asyncio.fixture
+async def client():
+    async with AsyncClient(
+        transport=ASGITransport(app=app),
+        base_url="http://test",
+        follow_redirects=True
+    ) as client:
+        yield client
+
 
 @pytest_asyncio.fixture
 async def get_jwt_token():
@@ -28,7 +37,7 @@ async def get_jwt_token():
         return token 
     
     
-@pytest_asyncio.fixture(autouse=True)
+@pytest_asyncio.fixture()
 async def get_login():
     async with AsyncClient(
         transport=ASGITransport(app=app),
@@ -41,20 +50,23 @@ async def get_login():
         })
 
 
-async def test_logout(get_login):
-    async with AsyncClient(
-        transport=ASGITransport(app=app),
-        base_url="http://test",
-        follow_redirects=True
-    ) as client:
-        response = await client.post("/logout/")
-        assert response.status_code == 200
+@pytest.mark.asyncio
+async def test_logout(client, get_login):
+    response = await client.post("/logout/")
+    assert response.status_code == 200
+    
+    set_cookie = response.headers.get("set-cookie")
+    assert set_cookie is not None, "Не получен заголовок Set_Cookie"
+    
+    assert 'access_token_cookie=""' in set_cookie
+    assert "Max-Age=0" in set_cookie or "expires=" in set_cookie
+    
+    print(f"Куки для удаления: {set_cookie}")
+
+    
+@pytest.mark.asyncio
+async def test_register(client):
+    register_response = await client.post("/register/", json={"username": "string", "password": "string"})
+    assert register_response.status_code == 200
         
-        set_cookie = response.headers.get("set-cookie")
-        assert set_cookie is not None, "Не получен заголовок Set_Cookie"
-        
-        assert 'access_token_cookie=""' in set_cookie
-        assert "Max-Age=0" in set_cookie or "expires=" in set_cookie
-        
-        print(f"Куки для удаления: {set_cookie}")
         
