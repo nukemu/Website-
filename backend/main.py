@@ -4,9 +4,9 @@ import uvicorn
 from fastapi import FastAPI, HTTPException, Depends, Response, Request, status
 from fastapi.middleware.cors import CORSMiddleware
 
-from schemas import UsersLoginSchema, UsersRegisterSchema, CheckAdmin, SetAdmin, DeleteAdmin, BanUser
+from schemas import UsersLoginSchema, UsersRegisterSchema, CheckAdmin, SetAdmin, DeleteAdmin, BanUser, UnbannUsers
 from jwt_config import security, config
-from orm import register_user, login_user, create_tables, check_admin, new_admin_set, admin_delete, user_ban
+from orm import register_user, login_user, create_tables, check_admin, new_admin_set, admin_delete, user_ban, user_unbann
 from database import engine
 
 app = FastAPI()
@@ -58,14 +58,31 @@ async def set_new_admin(set_admin: SetAdmin, verify_admin: CheckAdmin):
 @app.post("/delete_admin/", dependencies=[Depends(security.access_token_required)])
 async def delete_admin(delete_admin: DeleteAdmin, check_admins: CheckAdmin):
     if await check_admin(check_admins.username, check_admins.password):
-        return await admin_delete(delete_admin.username, delete_admin.reason)
+        try:
+            return await admin_delete(delete_admin.username, delete_admin.reason)
+        
+        except Exception as e:
+            print(f"Error: {e}")
 
 
 @app.post("/ban_user/", dependencies=[Depends(security.access_token_required)])
 async def ban_user(check_admins: CheckAdmin, ban_user: BanUser):
     if await check_admin(check_admins.username, check_admins.password):
-        return await user_ban(ban_user.username, ban_user.reason, ban_user.time)
+        try:
+            return await user_ban(ban_user.username, ban_user.reason, ban_user.time)
+        
+        except Exception as e:
+            print(f"Error: {e}")
 
+
+@app.post("/unbanned/", dependencies=[Depends(security.access_token_required)])
+async def unbanned(check_admins: CheckAdmin, unbann: UnbannUsers):
+    if await check_admin(check_admins.username, check_admins.password):
+        try:
+            return await user_unbann(unbann.username)
+
+        except Exception as e:
+            print(f"Error: {e}")
 
 if __name__ == "__main__":
     asyncio.run(create_tables(engine))
