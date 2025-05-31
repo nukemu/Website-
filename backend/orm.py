@@ -211,3 +211,26 @@ async def user_ban(username: str, reason: str, hours: int):
         await session.commit()
         
         return {"message": f"The user {username} has been banned"}
+    
+    
+async def user_unbann(username: str):
+    async with session_factory() as session:
+        result = await session.execute(
+            select(UsersOrm).where(
+                and_(
+                    UsersOrm.username==username,
+                    UsersOrm.is_banned==True
+                )
+            )
+        )
+        
+        user = result.scalar_one_or_none()
+        
+        if not user:
+            return {"message": "There is no banned user with such nickname"}
+        
+        user.is_banned = False
+        user.ban_reason = None
+        await session.commit()
+        
+        return {"message": f"The user {username} has been unbanned"}

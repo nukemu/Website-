@@ -29,3 +29,7 @@ class BanUser(BaseModel):
     username: str
     reason: str
     time: int
+    
+
+class UnbannUsers(BaseModel):
+    username: str
