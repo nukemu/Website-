@@ -28,7 +28,7 @@ class DeleteAdmin(BaseModel):
 class BanUser(BaseModel):
     username: str
     reason: str
-    time: int
+    hours: int
     
 
 class UnbannUsers(BaseModel):

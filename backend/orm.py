@@ -2,8 +2,9 @@ from datetime import datetime, timedelta
 import logging
 
 from passlib.context import CryptContext
-from sqlalchemy import select, and_
+from sqlalchemy import select, and_, update
 from fastapi import HTTPException, Response, status, Depends, Request
+from asyncio import create_task, sleep
 
 from models import UsersOrm, DeleteAdminsOrm
 from database import Base, session_factory
@@ -188,7 +189,6 @@ async def user_ban(username: str, reason: str, hours: int):
             select(UsersOrm).where(
                 and_(
                     UsersOrm.username==username,
-                    UsersOrm.is_banned==False
                 )
             )
         )
@@ -201,18 +201,48 @@ async def user_ban(username: str, reason: str, hours: int):
         if user.is_banned:
             return {"message": "This user is already banned"}
         
+        ban_time = datetime.utcnow()
         if hours == 0:
-            user.banned_until = None
+            user.banned_untill = None
+            await session.commit()
         else:
-            user.banned_until = datetime.now() + timedelta(hours=hours)
+            user.banned_untill = ban_time + timedelta(hours=hours)
+            await session.commit()
         
         user.is_banned=True
         user.ban_reason=reason
         await session.commit()
         
+        if hours > 0:
+            await schedule_unban(user.id, hours)
+        
         return {"message": f"The user {username} has been banned"}
     
-    
+
+async def schedule_unban(user_id: int, hours: int):
+    async with session_factory() as session:
+        sleep(hours * 3600)
+
+        result = await session.execute(
+            select(UsersOrm)
+            .where(UsersOrm.id==user_id)
+        )
+        
+        user = result.scalar_one_or_none()
+        
+        if user and user.is_banned and user.banned_untill:
+            await session.execute(
+                update(UsersOrm)
+                .where(UsersOrm.id == user_id)
+                .values(
+                    is_banned=False,
+                    ban_reason=None,
+                    banned_until=None
+                )
+            )
+            
+            await session.commit()
+
 async def user_unbann(username: str):
     async with session_factory() as session:
         result = await session.execute(

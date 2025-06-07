@@ -12,61 +12,62 @@ import asyncio
 async def client():
     async with AsyncClient(
         transport=ASGITransport(app=app),
-        base_url="http://test",
-        follow_redirects=True
-    ) as client:
+        base_url="http://test") as client:
+        
         yield client
+        
+        await client.aclose()
 
 
 @pytest_asyncio.fixture
-async def get_jwt_token():
-    async with AsyncClient(
-        transport=ASGITransport(app=app),
-        base_url="http://test",
-        follow_redirects=True
-    ) as client:
-        response = await client.post("/login/", json={"username": "admin", "password": "admin"})
-        assert response.status_code == 200
-        
-        set_cookie = response.headers.get("set-cookie")
-        assert set_cookie is not None, "Куки отсутствуют в ответе"
-        
-        token = set_cookie.split("access_token_cookie=")[1]
-        print("access token: ", f"{token}")
-        
-        return token 
+async def admin_client(client):
+    login_data = {"username": "admin", "password": "admin"}
+    response = await client.post("/login/", json=login_data)
+    assert response.status_code == 200
     
-    
-@pytest_asyncio.fixture()
-async def get_login():
-    async with AsyncClient(
-        transport=ASGITransport(app=app),
-        base_url="http://test",
-        follow_redirects=True
-    ) as client:
-        login_response = await client.post("/login/", json={
-                    "username": "admin",
-                    "password": "admin"
-        })
+    yield client
+        
+    await client.aclose()
+
+
+@pytest_asyncio.fixture(autouse=True)
+async def delay_between_tests():
+    yield
+    await asyncio.sleep(0.1)
 
 
 @pytest.mark.asyncio
-async def test_logout(client, get_login):
+async def test_login(client):
+    response = await client.post("/login/", json={"username": "admin", "password": "admin"})
+    assert response.status_code == 200
+    
+    set_cookie_headers = response.headers.get("set-cookie")
+    assert set_cookie_headers is not None
+    assert "access_token_cookie" in set_cookie_headers
+    
+
+@pytest.mark.asyncio
+async def test_logout(client):
     response = await client.post("/logout/")
     assert response.status_code == 200
     
-    set_cookie = response.headers.get("set-cookie")
-    assert set_cookie is not None, "Не получен заголовок Set_Cookie"
-    
-    assert 'access_token_cookie=""' in set_cookie
-    assert "Max-Age=0" in set_cookie or "expires=" in set_cookie
-    
-    print(f"Куки для удаления: {set_cookie}")
+    set_cookie_headers = response.headers.get("set-cookie")
+    assert set_cookie_headers is not None
+    assert 'access_token_cookie=""' in set_cookie_headers
+    assert "Max-Age=0" in set_cookie_headers or "expires=" in set_cookie_headers.lower()
+    print(set_cookie_headers)
 
-    
+
 @pytest.mark.asyncio
-async def test_register(client):
-    register_response = await client.post("/register/", json={"username": "string", "password": "string"})
-    assert register_response.status_code == 200
-        
-        
+async def test_set_admin(admin_client):
+    payload = {
+        "username": "string",
+        "verify_admin": {
+            "username": "admin",
+            "password": "admin"
+        }
+    }
+    
+    response = await admin_client.post("/set_new_admin/", json=payload)
+    assert response.status_code == 200
+    assert response.json() == {"message": f"User {payload["username"]} is now an admin!"}

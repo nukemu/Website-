@@ -1,15 +1,20 @@
 import asyncio
 import uvicorn
 
-from fastapi import FastAPI, HTTPException, Depends, Response, Request, status
+from fastapi import FastAPI, Depends, Response
 from fastapi.middleware.cors import CORSMiddleware
 
-from schemas import UsersLoginSchema, UsersRegisterSchema, CheckAdmin, SetAdmin, DeleteAdmin, BanUser, UnbannUsers
+from schemas import UsersLoginSchema, UsersRegisterSchema
 from jwt_config import security, config
-from orm import register_user, login_user, create_tables, check_admin, new_admin_set, admin_delete, user_ban, user_unbann
+from orm import register_user, login_user, create_tables
 from database import engine
+from routers import users, admins
+
 
 app = FastAPI()
+
+app.include_router(users.router)
+app.include_router(admins.router)
 
 app.add_middleware(
     CORSMiddleware,
@@ -44,45 +49,8 @@ async def check_login():
     return {"message": "You have the access token!"}
 
 
-@app.post("/set_new_admin/", dependencies=[Depends(security.access_token_required)])
-async def set_new_admin(set_admin: SetAdmin, verify_admin: CheckAdmin):
-    if not await check_admin(verify_admin.username, verify_admin.password):
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="You do not have administrator privileges"
-        )
-    
-    return await new_admin_set(set_admin.username)
 
 
-@app.post("/delete_admin/", dependencies=[Depends(security.access_token_required)])
-async def delete_admin(delete_admin: DeleteAdmin, check_admins: CheckAdmin):
-    if await check_admin(check_admins.username, check_admins.password):
-        try:
-            return await admin_delete(delete_admin.username, delete_admin.reason)
-        
-        except Exception as e:
-            print(f"Error: {e}")
-
-
-@app.post("/ban_user/", dependencies=[Depends(security.access_token_required)])
-async def ban_user(check_admins: CheckAdmin, ban_user: BanUser):
-    if await check_admin(check_admins.username, check_admins.password):
-        try:
-            return await user_ban(ban_user.username, ban_user.reason, ban_user.time)
-        
-        except Exception as e:
-            print(f"Error: {e}")
-
-
-@app.post("/unbanned/", dependencies=[Depends(security.access_token_required)])
-async def unbanned(check_admins: CheckAdmin, unbann: UnbannUsers):
-    if await check_admin(check_admins.username, check_admins.password):
-        try:
-            return await user_unbann(unbann.username)
-
-        except Exception as e:
-            print(f"Error: {e}")
 
 if __name__ == "__main__":
     asyncio.run(create_tables(engine))
