@@ -7,218 +7,102 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <title>Shop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <title>GovnoCoders</title>
 </head>
 <body>
-    
     <header class="header">
-        <div class="container">
-            <div class="head">
-                <div class="head-logo">
-                    <h1 class="logo">Говнокодеры</h1> 
-                    <img src="../shop/image/vscode.svg" alt="вскоде" class="vscode">
+        <div class="headrr">
+                <div class="head">
+                    <div class="head-logo">
+                        <h1 class="logo">Говно-Кодеры</h1>
+                        
+                        <nav class="nav-block">
+                            <h1 class="block-txt">Услуги</h1>
+                            <h1 class="block-txt">Блог</h1>
+                            <h1 class="block-txt">О нас</h1>
+                        </nav>
+
+                        <input class="switchs" type="checkbox" id="toogle" style="display: none;">
+
+                        <div class="display">
+                            <label for="toogle">
+                                <div class="circle">
+                                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
+                                </svg>
+                
+                                <svg class="moon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
+                                </svg>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    <a href="/frontend/login/index.html">
+                        <div class="account">
+                            <svg class="imag" stroke="#ffffff" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                            </svg>
+
+                            <span class="account-txt">Войти</span>
+                        </div>
+                    </a>
                 </div>
-                    <div class="search-form">
-                        <input class="search" type="text" placeholder="Введите текст">
-                        <a href="#"> <img src="image/lupa.png" alt="лупа" class="lupa"> </a>
-                    </div>
-                    <nav>
-                        <a href="google.com"><img class="imag" src="image/korzina.png" alt="корзина"></a>
-                        <a href="../register/register.html"><img class="imag" src="image/profile.png" alt="профиль"></a>
-                    </nav> 
-            </div>
-        
-    
-            <nav class="nav-info">
-                    <div class="people-list">
-
-                        <div class="people">
-                            <div class="people-card">
-                                <div class="card-head">   
-                                    <img src="image/kyrlyk.png" alt="kyrlyk" class="kyrlyk-photo">
-                                    <p class="front-txt"> Kyrlyk<br><span>Frontend</span></p>
-                                </div>
-
-                                <div class="people-btn">
-                                    <button class="uslugi active" data-service="service1">Услуги</button>
-                                    <button class="biograf active">Биография</button>
-                                </div>
-                            </div>
-                        </div>
-        
-                        <div class="people">
-                            <div class="people-card">
-                                <div class="card-head">
-                                    <img src="image/nukemu.jpg" alt="nukemu" class="kyrlyk-photo">
-                                    <p class="front-txt"> nukemu<br><span>Backend</span></p>
-                                </div>
-
-                                <div class="people-btn">
-                                    <button class="uslugi" data-service="service2">Услуги</button>
-                                    <button class="biograf">Биография</button>
-                                </div>
-                            </div>
-                        </div>
-        
-                        <div class="people">
-                            <div class="people-card">
-                                <div class="card-head">   
-                                    <img src="image/mocs.jpg" alt="mocs" class="kyrlyk-photo">
-                                    <p class="front-txt"> mocs<br><span>Backend</span></p>
-                                </div>
-
-                                <div class="people-btn">
-                                    <button class="uslugi" data-service="service3">Услуги</button>
-                                    <button class="biograf">Биография</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-            </nav>
         </div>
 
     </header>
 
     <main>
-        <div class="container">
+        <section class="flex-items">
+            <div class="full-max">
+                <div class="flex-w">
+                    <div class="l-branch"></div>
 
-            <div class="kataloguslug active" id="service1">
-                <div class="left-search">
-                    <aside>
-                        <div class="services">
-                            <h1 class="services-head">Типы услуг</h1>
-                            <ul class="services-list">
-                                <li> <input type="checkbox" name="option" onclick="handleCheckbox(this)" id="serviceCheckbox" class="checkbox-input"> <label>Вёрстка сайта</label></li>
-                                <li> <input type="checkbox" name="option" onclick="handleCheckbox(this)" id="serviceCheckbox2" class="checkbox-input2"> <label>Исправление кода</label></li>
-                                <li> <input type="checkbox" name="option" onclick="handleCheckbox(this)" id="serviceCheckbox3" class="checkbox-input3"> <label>Адаптация сайта</label></li>
-                            </ul>
+                    <div class="upwards">
+                        <div class="upwards-btn">
+                            <svg  class="upwards-ico" stroke="#9761FF" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m6.75 7.5 3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0 0 21 18V6a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 6v12a2.25 2.25 0 0 0 2.25 2.25Z" />
+                            </svg>
+                            VsCode
                         </div>
-                    </aside>
-                    
-                    <article>
-                        <div class="none-idea">
-                            <h1 class="none-txt">Не придумал</h1>
-                        </div>
-                    </article>
-                </div>
 
-                <article class="article-card">
-                    <div class="card-verstka">
-                        <img src="image/verstka.png" alt="verstka" class="verstka-image">
-                        <h3 class="verstka-txt">Семантическая вёрстка</h3>
-                        <div class="bottom-card">
-                            <h2 class="verstka-mon">5 USD</h2>
-                            <button class="basket">В КОРЗИНУ</button>
+                        <div class="upwards-btn">
+                            <svg class="upwards-ico" stroke="#9761FF" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+                            </svg>
+                            Frontend
+                        </div>
+
+                        <div class="upwards-btn">
+                            <svg class="upwards-ico" stroke="#9761FF" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125" />
+                            </svg>
+                            Backend
                         </div>
                     </div>
-                </article>
 
-            </div>
+                    <h1 class="main-txt">Создавай и развивай<br>
+                    проекты вместе с нами</h1>
 
-            <div class="kataloguslug" id="service2">
-                <div class="left-search">
-                    <aside>
-                        <div class="services">
-                            <h1 class="services-head">Типы услуг</h1>
-                            <ul class="services-list">
-                                <li> <input type="checkbox" name="option" onclick="handleCheckbox(this)" id="serviceCheckbox" class="checkbox-input"> <label>База данных</label></li>
-                                <li> <input type="checkbox" name="option" onclick="handleCheckbox(this)" id="serviceCheckbox2" class="checkbox-input2"> <label>Рефакторинг</label></li>
-                                <li> <input type="checkbox" name="option" onclick="handleCheckbox(this)" id="serviceCheckbox3" class="checkbox-input3"> <label>API</label></li>
-                            </ul>
-                        </div>
-                    </aside>
-                    
-                    <article>
-                        <div class="none-idea">
-                            <h1 class="none-txt">Не придумал</h1>
-                        </div>
-                    </article>
+                    <a href="#" class="begin-btn">
+                        <svg  class="arrow-btn" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m12.75 15 3-3m0 0-3-3m3 3h-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                        </svg>
+                        <span class="btn-txt">Начать работу</span>
+                    </a>
+
+                    <a href="#" class="all-proect">
+                        <svg class="arrow-btn" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                        </svg>
+                        <span class="btn-txt">Все проекты</span>
+                    </a>
                 </div>
-
-                <article class="article-card">
-                    <div class="card-verstka">
-                        <img src="image/base.png" alt="verstka" class="verstka-image">
-                        <h3 class="verstka-txt">База данных</h3>
-                        <div class="bottom-card">
-                            <h2 class="verstka-mon">10 USD</h2>
-                            <button class="basket">В КОРЗИНУ</button>
-                        </div>
-                    </div>
-                </article>
-
             </div>
-
-            <div class="kataloguslug" id="service3">
-                <div class="left-search">
-                    <aside>
-                        <div class="services">
-                            <h1 class="services-head">Типы услуг</h1>
-                            <ul class="services-list">
-                                <li> <input type="checkbox" name="option" onclick="handleCheckbox(this)" id="serviceCheckbox" class="checkbox-input"> <label>Оптимизация API</label></li>
-                                <li> <input type="checkbox" name="option" onclick="handleCheckbox(this)" id="serviceCheckbox2" class="checkbox-input2"> <label>Настройка серверов</label></li>
-                                <li> <input type="checkbox" name="option" onclick="handleCheckbox(this)" id="serviceCheckbox3" class="checkbox-input3"> <label>Мониторинг</label></li>
-                            </ul>
-                        </div>
-                    </aside>
-                    
-                    <article>
-                        <div class="none-idea">
-                            <h1 class="none-txt">Не придумал</h1>
-                        </div>
-                    </article>
-                </div>
-
-                <article class="article-card">
-                    <div class="card-verstka">
-                        <img src="image/api.png" alt="verstka" class="verstka-image">
-                        <h3 class="verstka-txt">Оптимизация Api</h3>
-                        <div class="bottom-card">
-                            <h2 class="verstka-mon">10 USD</h2>
-                            <button class="basket">В КОРЗИНУ</button>
-                        </div>
-                    </div>
-                </article>
-            </div>
-
-            <div class="bio-catalog" id="bio1">
-                <div class="biograf-head">
-                    <h1 class="biograf-txt">Kyrlyk</h1>
-                </div>
-
-                <article>
-                    <div class="description">
-                        <h1 class="none-txt">Начинающий <span>Frontend</span> разработчик с горячим интересом к созданию удобных и современных веб-интерфейсов. Активно осваиваю JavaScript/TypeScript, React и вёрстку, стремлюсь к чистому коду и пониманию лучших практик. Готов учиться, впитывать опыт и расти в крутой команде.</h1>
-                    </div>
-
-                </article>
-            </div>
-
-            <div class="bio-catalog" id="bio2">
-                <div class="biograf-head">
-                    <h1 class="biograf-txt">nukemu</h1>
-                </div>
-
-                <article>
-                    <div class="description">
-                        <h1 class="none-txt">Backend</h1>
-                    </div>
-
-                </article>
-            </div>
-
-            <div class="bio-catalog" id="bio3">
-                <div class="biograf-head">
-                    <h1 class="biograf-txt">mocs</h1>
-                </div>
-
-                <article>
-                    <div class="description">
-                        <h1 class="none-txt">backend</h1>
-                    </div>
-
-                </article>
-            </div>
-        </div>
+        </section>
     </main>
 
     

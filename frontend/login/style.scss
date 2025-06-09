@@ -1,0 +1,19 @@
+body {
+    background-image: url(deep-dive-into-coding-realms-ky.jpg);
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+
+}
+
+main {
+        width: 100px;
+    height: 500px;
+    background: gray; }
+
+.register{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
