@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 
-from orm import admin_delete, check_admin, new_admin_set
-from schemas import CheckAdmin, DeleteAdmin, SetAdmin
+from orm import admin_delete, check_admin, new_admin_set, user_delete
+from schemas import CheckAdmin, DeleteAdmin, SetAdmin, DeleteUsers
 from jwt_config import security
 
 
@@ -26,6 +26,16 @@ async def delete_admin(delete_admin: DeleteAdmin, check_admins: CheckAdmin):
     if await check_admin(check_admins.username, check_admins.password):
         try:
             return await admin_delete(delete_admin.username, delete_admin.reason)
+        
+        except Exception as e:
+            print(f"Error: {e}")
+            
+
+@router.delete("/delete_user/", dependencies=[Depends(security.access_token_required)])
+async def delete_user(delete_user: DeleteUsers, check_admins: CheckAdmin):
+    if await check_admin(check_admins.username, check_admins.password):
+        try:
+            return await user_delete(delete_user.username)
         
         except Exception as e:
             print(f"Error: {e}")

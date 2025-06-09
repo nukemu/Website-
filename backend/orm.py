@@ -49,7 +49,7 @@ async def admin_true(username: str):
         return result.scalar_one_or_none()
     
     
-async def register_user(username: str, password: str, response: Response):
+async def register_user(username: str, password: str, email: str, response: Response):
     async with session_factory() as session:
         result = await session.execute(select(UsersOrm.username).where(UsersOrm.username==username))
         user_username = result.scalar_one_or_none()
@@ -63,6 +63,7 @@ async def register_user(username: str, password: str, response: Response):
         user = UsersOrm(
             username=username, 
             hashed_password=get_hashed_password(password),
+            email=email,
         )
         
         session.add(user)
@@ -264,3 +265,24 @@ async def user_unbann(username: str):
         await session.commit()
         
         return {"message": f"The user {username} has been unbanned"}
+    
+
+async def user_delete(username: str):
+    async with session_factory() as session:
+        result = await session.execute(
+            select(UsersOrm)
+            .where(UsersOrm.username==username)
+        )
+        
+        user = result.scalar_one_or_none()
+        
+        if not user:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="User with this username not found"
+            )
+        
+        await session.delete(user)
+        await session.commit()
+        
+        return {"message": f"User '{username}' deleted successfully"}
