@@ -1,7 +1,7 @@
 from datetime import datetime
-from sqlalchemy import DateTime, ForeignKey
-from sqlalchemy.orm import Mapped, mapped_column, relationship
-from pydantic import Field
+from sqlalchemy import Boolean, DateTime, String
+from sqlalchemy.orm import Mapped, mapped_column
+from pydantic import EmailStr
 
 from database import Base
 
@@ -10,11 +10,12 @@ class UsersOrm(Base):
     __tablename__ = "users"
     
     id: Mapped[int] = mapped_column(primary_key=True)
-    username: Mapped[str]
-    hashed_password: Mapped[str]
-    is_admin: Mapped[bool] = mapped_column(nullable=True, default=False)
-    is_banned: Mapped[bool] = mapped_column(default=False)
-    ban_reason: Mapped[str] = mapped_column(nullable=True)
+    username: Mapped[str] = mapped_column(String)
+    hashed_password: Mapped[str] = mapped_column(String)
+    email: Mapped[str] = mapped_column(String(255))
+    is_admin: Mapped[bool] = mapped_column(Boolean, nullable=True, default=False)
+    is_banned: Mapped[bool] = mapped_column(Boolean, default=False)
+    ban_reason: Mapped[str | None] = mapped_column(String, nullable=True)
     banned_untill: Mapped[datetime] = mapped_column(DateTime, nullable=True)
     
     
@@ -35,6 +36,6 @@ class DeleteAdminsOrm(Base):
     __tablename__ = "delete_admins"
     
     id: Mapped[int] = mapped_column(primary_key=True)
-    username: Mapped[str]
-    reason: Mapped[str]
+    username: Mapped[str] = mapped_column(String)
+    reason: Mapped[str] = mapped_column(String)
     
