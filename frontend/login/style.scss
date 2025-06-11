@@ -3,17 +3,192 @@ body {
     min-height: 100vh;
     background-size: cover;
     background-position: center;
-
+    margin: 0;
+    overflow: hidden;
 }
 
-main {
-        width: 100px;
-    height: 500px;
-    background: gray; }
-
 .register{
+    width: 320px;
+    background: rgb(36,36,48);
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
+    padding: 32px 32px 16px;
+
+    .logo{
+        color: white;
+        font: {
+            family: "Inter", sans-serif;
+            size: 30px;
+            style: bold;
+        }
+    }
+
+    form{
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .txt-login {
+        margin: 0;
+        color: white;
+        font: {
+            family:"Montserrat", sans-serif;
+            size: 23px;
+            weight: 500;
+        }
+    }
+
+    .input-txt {
+        margin: 0 0 6px;
+        color: white;
+        font: {
+            family:"Montserrat", sans-serif;
+            size: 15px;
+            weight: 500;
+        }
+    }
+
+    .one-input, .two-input {
+        margin-bottom: 20px;
+    }
+
+    .input-box {
+        width: 320px;
+        height: 40px;
+    }
+
+    .input-box input {
+        width: 90%;
+        height: 100%;
+        background:transparent;
+        border: 1px solid rgba(255, 255, 255, 0.527);
+        border-radius: 5px;
+        padding: 3px 0 1px 17px;
+        color: white;
+        font: {
+            family: "inter", sans-serif;
+            weight: 400;
+            size: 16px;
+        }
+        &:focus-within {
+            border: 1px solid #7b84ed;
+            outline: 3px solid #383c7c;
+        }
+        &:hover{
+            background: #2a2a36;
+        }
+    }
+
+    .input-box input::placeholder {
+        color: rgba(255, 255, 255, 0.541);
+        font-size: 16px;
+    }
+
+    .remember {
+        a{
+            text-decoration: none;
+            margin-left: 50px;
+            color: rgb(255, 255, 255);
+            font: {
+                family:"Montserrat", sans-serif;
+                size: 15px;
+                weight: 500;
+            }
+        }
+
+        label{
+            text-decoration: none;
+            color: rgb(255, 255, 255);
+            font: {
+                family:"Montserrat", sans-serif;
+                size: 15px;
+                weight: 500;
+            }
+        }
+    }
+
+    .btn {
+        width: 310px;
+        height: 50px;
+        margin-top: 20px;
+        background: rgb(120 105 253);
+        border: none;
+        border-radius: 5px;
+        color: rgb(0, 0, 0);
+        transition: background-color 0.2s linear;
+        font: {
+            family: "Montserrat", sans-serif;
+            weight: 700;
+            size: 17px;  
+        }
+        &:hover{
+            background-color: rgb(86, 67, 255);
+        }
+    }
+
+    .btn-google {
+        width: 310px;
+        height: 50px;
+        margin-top: 20px;
+        background: rgb(255, 190, 24);
+        border: none;
+        border-radius: 5px; 
+        color: rgb(0, 0, 0);
+        font: {
+            family: "Montserrat", sans-serif;
+            weight: 700;
+            size: 14px;
+        }
+        transition: background-color 0.2s linear;
+        &:hover{
+            background-color: rgba(255, 183, 0, 0.87);
+        }
+    }
+
+    .inmain-txt{
+        text-decoration: none;
+        color: rgb(107, 14, 255);
+        font: {
+            family:"Montserrat", sans-serif;
+            size: 15px;
+            weight: 500;
+        }
+    }
+
+    .new-acc{
+        p, .reg-txt {
+            text-decoration: none;
+            color: rgb(255, 255, 255);
+            font: {
+                family:"Montserrat", sans-serif;
+                size: 15px;
+                weight: 500;
+            }
+
+        }
+    }
+}
+
+.rest-btn{
+    display: flex;
+    flex-direction: column;
+
+    .backmain {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0 48px;
+    }
+}
+
+.contact {
+    margin-top: 250px;
+    span{
+        color: white;
+        font: {
+            family:"Montserrat", sans-serif;
+            size: 15px;
+            weight: 500;
+        }
+    }
 }

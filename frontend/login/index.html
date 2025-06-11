@@ -9,37 +9,61 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <main>
-        <div class="register">
+<main>
+    <div class="register">
+
+        <h1 class="logo">GovnoCoders</h1>
+        <div class="reg-form">
             <form action="#">
-                <h1 class="txt-login">Войти</h1>  
-                    <div class="input-box">
-                        <input type="text" placeholder="Введите логин" required>
+                <h1 class="txt-login">Вход в систему</h1>
+
+                    <div class="login-form">
+
+                        <div class="one-input">
+                            <p class="input-txt">Login</p>
+                            <div class="input-box">
+                                <input type="text" placeholder="mail.@example.com" required>
+                            </div>
+                        </div>
+
+                        <div class="two-input">
+                            <p class="input-txt">Password</p>
+                            <div class="input-box">
+                                <input type="password" required>
+                            </div>
+                        </div>
+
+                        <div class="remember">
+                            <label for=""><input type="checkbox">Remember me</label>
+                            <a href="https://quran.com" class="zabil">Забыл пароль?</a>
+                        </div>
+
+                    </div>
+                            
+                    <div class="rest-btn">
+                        <button type="submit" class="btn">Войти</button>
+                        <button type="submit" class="btn-google">Войти через Google</button>
+
+
+                        <div class="new-acc">
+                            <p>Нет аккаунта? <a href="../register/register.html" class="reg-txt" style="color: yellow; margin-left: 38%;">Register</a></p>
+                        </div>
+
+                        <div class="backmain">
+                            <a href="../shop/index.html" class="inmain-txt">Вернуться на главную</a>
+                        </div>
                     </div>
 
-                    <div class="input-box">
-                        <input type="password" placeholder="Введите пароль" required>
-                    </div>
-
-                    <div class="remember">
-                        <label for=""><input type="checkbox">Remember me</label>
-                        <a href="https://quran.com" class="zabil">Забыл пароль?</a>
-                    </div>
-                    
-                    <button type="submit" class="btn">Войти</button>
-
-                    <div class="new-acc">
-                        <p>Нет аккаунта? <a href="../register/register.html" class="reg-txt">Register</a></p>
-                    </div>
-
-                    <div class="backmain">
-                        <a href="../shop/index.html" class="main-txt">Вернуться на главную</a>
+                    <div class="contact">
+                        <span>Помощь - @govnocoders</span>
                     </div>
             </form>
         </div>
-    </main>
+    </div>
+</main>
     
 </body>
 </html>

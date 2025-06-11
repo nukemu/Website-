@@ -3,15 +3,13 @@ body {
   min-height: 100vh;
   background-size: cover;
   background-position: center;
-}
-
-main {
-  width: 100px;
-  height: 500px;
-  background: gray;
+  margin: 0;
+  overflow: hidden;
 }
 
 .register {
+  width: 320px;
+  background: rgb(36, 36, 48);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -19,10 +17,173 @@ main {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  padding: 32px 32px 16px;
+}
+.register .logo {
+  color: white;
+  font-family: "Inter", sans-serif;
+  font-size: 30px;
+  font-style: bold;
+}
+.register form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 24px;
+}
+.register .txt-login {
+  margin: 0;
+  color: white;
+  font-family: "Montserrat", sans-serif;
+  font-size: 23px;
+  font-weight: 500;
+}
+.register .input-txt {
+  margin: 0 0 6px;
+  color: white;
+  font-family: "Montserrat", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+}
+.register .one-input, .register .two-input {
+  margin-bottom: 20px;
+}
+.register .input-box {
+  width: 320px;
+  height: 40px;
+}
+.register .input-box input {
+  width: 90%;
+  height: 100%;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.527);
+  border-radius: 5px;
+  padding: 3px 0 1px 17px;
+  color: white;
+  font-family: "inter", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+}
+.register .input-box input:focus-within {
+  border: 1px solid #7b84ed;
+  outline: 3px solid #383c7c;
+}
+.register .input-box input:hover {
+  background: #2a2a36;
+}
+.register .input-box input::-webkit-input-placeholder {
+  color: rgba(255, 255, 255, 0.541);
+  font-size: 16px;
+}
+.register .input-box input::-moz-placeholder {
+  color: rgba(255, 255, 255, 0.541);
+  font-size: 16px;
+}
+.register .input-box input:-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.541);
+  font-size: 16px;
+}
+.register .input-box input::-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.541);
+  font-size: 16px;
+}
+.register .input-box input::placeholder {
+  color: rgba(255, 255, 255, 0.541);
+  font-size: 16px;
+}
+.register .remember a {
+  text-decoration: none;
+  margin-left: 50px;
+  color: rgb(255, 255, 255);
+  font-family: "Montserrat", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+}
+.register .remember label {
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+  font-family: "Montserrat", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+}
+.register .btn {
+  width: 310px;
+  height: 50px;
+  margin-top: 20px;
+  background: rgb(120, 105, 253);
+  border: none;
+  border-radius: 5px;
+  color: rgb(0, 0, 0);
+  -webkit-transition: background-color 0.2s linear;
+  transition: background-color 0.2s linear;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  font-size: 17px;
+}
+.register .btn:hover {
+  background-color: rgb(86, 67, 255);
+}
+.register .btn-google {
+  width: 310px;
+  height: 50px;
+  margin-top: 20px;
+  background: rgb(255, 190, 24);
+  border: none;
+  border-radius: 5px;
+  color: rgb(0, 0, 0);
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  -webkit-transition: background-color 0.2s linear;
+  transition: background-color 0.2s linear;
+}
+.register .btn-google:hover {
+  background-color: rgba(255, 183, 0, 0.87);
+}
+.register .inmain-txt {
+  text-decoration: none;
+  color: rgb(107, 14, 255);
+  font-family: "Montserrat", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+}
+.register .new-acc p, .register .new-acc .reg-txt {
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+  font-family: "Montserrat", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.rest-btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+.rest-btn .backmain {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 10px 0 48px;
+}
+
+.contact {
+  margin-top: 250px;
+}
+.contact span {
+  color: white;
+  font-family: "Montserrat", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
 }
