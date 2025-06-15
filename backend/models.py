@@ -1,9 +1,11 @@
 from datetime import datetime
-from sqlalchemy import Boolean, DateTime, String
+from sqlalchemy import Boolean, DateTime, Float, String
 from sqlalchemy.orm import Mapped, mapped_column
 from pydantic import EmailStr
 
 from database import Base
+from enum import Enum as PyEnum
+
 
 
 class UsersOrm(Base):
@@ -18,6 +20,19 @@ class UsersOrm(Base):
     ban_reason: Mapped[str | None] = mapped_column(String, nullable=True)
     banned_untill: Mapped[datetime] = mapped_column(DateTime, nullable=True)
     
+
+class ServiceType(PyEnum):
+    FRONTEND = "frontend"
+    BACKEND = "backend"
+
+
+class ServiceOrm(Base):
+    __tablename__ = "services"
+    
+    id: Mapped[int] = mapped_column(primary_key=True)
+    service_type: Mapped[ServiceType] = mapped_column(nullable=False)
+    name: Mapped[str] = mapped_column(String(100), nullable=False)
+    price: Mapped[float] = mapped_column(Float, nullable=False)
     
 
 # class BansUsersOrm(Base):

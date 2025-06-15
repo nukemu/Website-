@@ -1,3 +1,4 @@
+from typing import Optional
 from pydantic import BaseModel, EmailStr
 
 
@@ -38,3 +39,25 @@ class UnbannUsers(BaseModel):
 
 class DeleteUsers(BaseModel):
     username: str
+    
+
+class ServiceFilter(BaseModel):
+    name: str
+    service_type: str
+    price: int
+    
+
+class ServiceResponse(BaseModel):
+    id: int
+    service_type: str
+    name: str
+    price: int
+
+    class Config:
+        from_attributes = True 
+        
+
+class ServiceAdd(BaseModel):
+    name: str
+    service_type: str
+    price: int

@@ -6,7 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from orm import create_tables
 from database import engine
-from routers import users, admins, auth
+from routers import users, admins, auth, services
 
 
 app = FastAPI()
@@ -14,6 +14,7 @@ app = FastAPI()
 app.include_router(users.router)
 app.include_router(admins.router)
 app.include_router(auth.router)
+app.include_router(services.router)
 
 app.add_middleware(
     CORSMiddleware,

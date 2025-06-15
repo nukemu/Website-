@@ -1,14 +1,16 @@
 from datetime import datetime, timedelta
 import logging
+from typing import List, Optional
 
 from passlib.context import CryptContext
 from sqlalchemy import select, and_, update
-from fastapi import HTTPException, Response, status, Depends, Request
+from fastapi import HTTPException, Query, Response, status, Depends, Request
 from asyncio import create_task, sleep
 
-from models import UsersOrm, DeleteAdminsOrm
+from models import UsersOrm, DeleteAdminsOrm, ServiceOrm
 from database import Base, session_factory
 from jwt_config import security, config
+from schemas import ServiceResponse
 
 
 logging.basicConfig(level=logging.DEBUG)
@@ -273,7 +275,6 @@ async def user_delete(username: str):
             select(UsersOrm)
             .where(UsersOrm.username==username)
         )
-        
         user = result.scalar_one_or_none()
         
         if not user:
@@ -286,3 +287,54 @@ async def user_delete(username: str):
         await session.commit()
         
         return {"message": f"User '{username}' deleted successfully"}
+    
+    
+async def service_get(
+    name: Optional[str] = None,
+    service_type: Optional[str] = None,
+    price: Optional[int] = None
+) -> List[ServiceResponse]:
+    async with session_factory() as session:
+        try:
+            query = select(ServiceOrm)
+            filters = []
+            
+            if name is not None:
+                filters.append(ServiceOrm.name == name)
+            if service_type is not None:
+                filters.append(ServiceOrm.service_type == service_type.upper())
+            if price is not None:
+                filters.append(ServiceOrm.price == price)
+                
+            if filters:
+                query = query.where(and_(*filters))
+            
+            result = await session.execute(query)
+            services = result.scalars().all()
+            
+            if not services:
+                raise HTTPException(
+                    status_code=status.HTTP_404_NOT_FOUND,
+                    detail="Services not found with these filters"
+                )
+                
+            return [ServiceResponse.model_validate(s) for s in services]
+            
+        except Exception as e:
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail=f"Database error: {str(e)}"
+            )
+    
+
+async def service_add(name: str, type: str, price: int):
+    async with session_factory() as session:
+        service = ServiceOrm(
+            name=name,
+            service_type=type, 
+            price=price
+        )
+        
+        session.add(service)
+        await session.commit()
+        return {"message": "Service successfully added!"}
