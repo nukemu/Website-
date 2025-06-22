@@ -3,11 +3,12 @@ import logging
 from typing import List, Optional
 
 from passlib.context import CryptContext
+from pydantic import EmailStr
 from sqlalchemy import select, and_, update
 from fastapi import HTTPException, Query, Response, status, Depends, Request
 from asyncio import create_task, sleep
 
-from models import UsersOrm, DeleteAdminsOrm, ServiceOrm
+from models import UsersOrm, DeleteAdminsOrm, ServiceOrm, ResetTokenOrm
 from database import Base, session_factory
 from jwt_config import security, config
 from schemas import ServiceResponse
@@ -51,7 +52,24 @@ async def admin_true(username: str):
         return result.scalar_one_or_none()
     
     
-async def register_user(username: str, password: str, email: str, response: Response):
+async def email_true(username: str, email: EmailStr):
+    async with session_factory() as session:
+        result = await session.execute(
+            select(UsersOrm)
+            .where(
+                UsersOrm.email==email,
+                   UsersOrm.username==username
+            )
+        )
+        user = result.scalar_one_or_none()
+        
+        if not user:
+            return False
+        
+        return True
+    
+    
+async def register_user(username: str, password: str, email: str, email_password: str,response: Response):
     async with session_factory() as session:
         result = await session.execute(select(UsersOrm.username).where(UsersOrm.username==username))
         user_username = result.scalar_one_or_none()
@@ -66,6 +84,7 @@ async def register_user(username: str, password: str, email: str, response: Resp
             username=username, 
             hashed_password=get_hashed_password(password),
             email=email,
+            email_password=email_password
         )
         
         session.add(user)
@@ -243,8 +262,8 @@ async def schedule_unban(user_id: int, hours: int):
                     banned_until=None
                 )
             )
-            
             await session.commit()
+
 
 async def user_unbann(username: str):
     async with session_factory() as session:
@@ -256,7 +275,6 @@ async def user_unbann(username: str):
                 )
             )
         )
-        
         user = result.scalar_one_or_none()
         
         if not user:
@@ -338,3 +356,40 @@ async def service_add(name: str, type: str, price: int):
         session.add(service)
         await session.commit()
         return {"message": "Service successfully added!"}
+    
+    
+async def reset_token_add(username: str, token: str, expires_at: str | int):
+    async with session_factory() as session:
+        user_result = await session.execute(
+            select(UsersOrm)
+            .where(UsersOrm.username==username)
+        )
+        user = user_result.scalar_one_or_none()
+        
+        if not user:
+            return False
+            
+        reset_token = ResetTokenOrm(
+            token=token,
+            user_id=user.id,
+            expires_at=expires_at
+        )
+        
+        session.add(reset_token)
+        await session.commit()
+        return True
+    
+
+async def password_reset(user_id: str, new_password: str):
+    async with session_factory() as session:
+        hashed_password = get_hashed_password(new_password)
+        
+        await session.execute(
+            update(UsersOrm)
+            .where(UsersOrm.id==user_id)
+            .values(
+                hashed_password=hashed_password
+            )
+        )
+        await session.commit()
+        return {"message": "Password successfully changed!`"}

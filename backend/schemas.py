@@ -11,6 +11,7 @@ class UsersRegisterSchema(BaseModel):
     username: str
     password: str
     email: EmailStr
+    email_password: str
     
 
 class SetAdmin(BaseModel):
@@ -61,3 +62,17 @@ class ServiceAdd(BaseModel):
     name: str
     service_type: str
     price: int
+    
+
+class PasswordReset(BaseModel):
+    email: EmailStr
+    
+
+class CheckEmail(BaseModel):
+    username: str
+    email: EmailStr
+    
+
+class ResetPassword(BaseModel):
+    token: str
+    new_password: str
