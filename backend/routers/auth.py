@@ -39,7 +39,7 @@ async def logout(response: Response):
 
 
 @router.post("/forgot_password/")
-async def forgot_password(request: PasswordReset,check_email: CheckEmail):
+async def forgot_password(request: PasswordReset, check_email: CheckEmail):
     if not await email_true(check_email.username, check_email.email):
         return {"message": "Incorrect username or email"}
 
