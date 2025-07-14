@@ -20,3 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+for (let i = 1, n = 0; i <= 10; i++, n++) {
+        console.log('Итерация № ' + i, ' = ', n);
+    }
