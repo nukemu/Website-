@@ -1,145 +1,231 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
 body {
-    background-image: url(Black-Mountain-Night-Widescreen-Wallpapers-117673.jpg);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-size: cover;
-    background-position: center;
-
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
-.txt-login {
-    font-family: "Montserrat", sans-serif;
-    font-size: clamp( 35px, 2vw, 100px);
-    margin-bottom: 30px;
+section {
+  display: -ms-grid;
+  display: grid;
+  position: relative;
+  place-items: center;
+  margin: 48px 0;
+  padding: 0px 48px;
+  width: 100%;
 }
 
-.register {
-    text-align: center;
-    background-color: transparent;
-    padding: 80px 60px 50px 60px;
-    border: 20%;
-    border-radius: 15px;
-    border: 2px solid rgba(255, 255, 255, 0.418);
-    backdrop-filter: blur(25px);
-    color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+.logotype {
+  position: absolute;
+  top: 0;
+  left: 16px;
+  margin: 0 15px 50px;
+  color: #0098fd;
+  font-family: "Oooh Baby", cursive;
+  font-weight: 680;
+  font-size: 30px;
 }
 
-
-.zabil {
-    text-decoration: none;
-    margin-left: 50px;
-    color: rgb(255, 255, 255);
+.image-section {
+  width: 35%;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  overflow: hidden;
 }
 
-.reg-txt {
-    margin-left: 3px;
-    text-decoration: none;
-    color: rgb(231, 208, 3);
+.image-section img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  display: block;
 }
 
-.input-box {
-    width: 400px;
-    height: 50px;
-    margin: 30px 0px;
+.form-section {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  padding: 0 2rem 3.5rem;
+  min-width: 60%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
-.input-box input {
-    width: 90%;
-    height: 100%;
-    background:transparent ;
-    outline: none;
-    border: none;
-    border: 2.5px solid rgba(255, 255, 255, 0.685);
-    border-radius: 22px;
-    padding-top: 3px;
-    padding-left: 17px;
-    font-family: "Montserrat", sans-serif;
-    font-weight: 600;
-    font-size: 15px;
-    color: white;
+.form-container {
+  width: 100%;
+  max-width: 500px;
+  padding: 0 2rem 3.5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 25px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.form-container .logo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+  gap: 20px;
+}
+.form-container .logo-svg {
+  width: 40px;
+}
+.form-container h1 {
+  margin-bottom: 0.5rem;
+  color: #333;
+  text-align: center;
+  font-family: "Mona Sans", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 29px;
+}
+.form-container .description {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-family: "Mona Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+}
+.form-container .google-btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  background-color: #fcfcfc;
+  width: 310px;
+  max-width: 400px;
+  min-width: -webkit-min-content;
+  min-width: -moz-min-content;
+  min-width: min-content;
+  border-radius: 20px;
+  border: #333 1px solid;
+  padding: 8px;
+  -webkit-transition: background-color 0.3s, border 0.3s;
+  transition: background-color 0.3s, border 0.3s;
+}
+.form-container .google-btn:hover {
+  background-color: rgba(157, 196, 255, 0.3568627451);
+  border-color: #83b5ff;
+}
+.form-container .google-btn .goggl-txt {
+  color: #000000;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 550;
+  font-size: 16px;
+}
+.form-container .form-group {
+  margin-bottom: 1.5rem;
+}
+.form-container input {
+  width: 310px;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  -webkit-transition: border 0.3s;
+  transition: border 0.3s;
+}
+.form-container input:focus {
+  border-color: #4a90e2;
+  outline: none;
+}
+.form-container button {
+  width: 100%;
+  padding: 1rem;
+  background-color: #000000;
+  color: white;
+  border: none;
+  border-radius: 17px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s;
+}
+.form-container button:hover {
+  background-color: #585858;
+}
+.form-container .login {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.form-container .login-link {
+  text-align: center;
+  color: rgba(0, 17, 255, 0.84);
+  padding-right: 30px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 550;
+  font-size: 16px;
+}
+.form-container .login-a {
+  color: #000000;
+  text-decoration: none;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 550;
+  font-size: 16px;
+  -webkit-transition: color 0.3s;
+  transition: color 0.3s;
+}
+.form-container .login-a:hover {
+  color: rgba(255, 123, 0, 0.9921568627);
 }
 
-.input-box input::placeholder {
-    color: rgb(255, 255, 255);
-    font-size: 16px;
-}
-
-.btn {
+@media (max-width: 768px) {
+  body {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .image-section {
     width: 100%;
-    height: 46px;
-    background: rgb(231, 208, 3);
-    border: none;
-    border-radius: 18px;
-    font-family: "Montserrat", sans-serif;
-    font-weight: 700;
-    transition: background-color 0.3s linear;
-    font-size: 15px;
-}
-
-.btn:hover{
-    background-color: rgb(255, 255, 255);
-}
-
-.new-acc {
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-.backmain {
-    margin-top: 60px;
-}
-
-.main-txt {
-    font-family: 'Montserrat';
-    text-decoration: none;
-    color: rgb(231, 208, 3);
-    font-weight: 500;
-}
-
-@media (max-width: 635px) {
-    .register{
-        padding: 30px 30px 40px 30px;
-    }   
-}
-
-@media (max-width: 500px) {
-    .register{
-        padding: 20px 20px;
-    }   
-
-    .input-box input {
-        font-weight: 600;
-        font-size: 15px;
-        border-radius: 22px;
-        padding-top: 3px;
-        padding-left: 17px;
-    }
-
-    .input-box {
-        width: 345px;
-        height: 47px;
-        margin: 35px 0px;
-    }
-}
-
-@media (max-width: 430px) {
-    .register{
-        padding: 20px 17px;
-    }   
-
-    .input-box input {
-        font-weight: 600;
-        font-size: 15px;
-        border-radius: 14px;
-        padding-top: 3px;
-        padding-left: 13px;
-    }
-
-    .input-box {
-        width: 310px;
-        height: 47px;
-        margin: 35px 0px;
-    }
+    height: 200px;
+  }
+  .form-section {
+    width: 100%;
+    min-width: 100%;
+  }
 }
